@@ -937,6 +937,85 @@ function App() {
                                 <div className="current-step">
                                     <h3>Current Step:</h3>
                                     <p>{selectedExperiment.steps[currentStep]}</p>
+
+                                    {/* Animated Step Illustration */}
+                                    <div className="step-illustration active">
+                                        {/* Step 1: Add baking soda - show powder falling into beaker */}
+                                        {currentStep === 0 && (
+                                            <>
+                                                <div className="beaker">
+                                                    <div className="beaker-content"></div>
+                                                </div>
+                                                <div className="powder"></div>
+                                                <div className="hand"></div>
+                                            </>
+                                        )}
+
+                                        {/* Step 2: Add food coloring (optional) - show dropper */}
+                                        {currentStep === 1 && (
+                                            <>
+                                                <div className="beaker">
+                                                    <div className="beaker-content" style={{ height: '40%', background: 'rgba(255, 255, 255, 0.3)' }}></div>
+                                                </div>
+                                                <div className="hand" style={{ top: '80px' }}></div>
+                                            </>
+                                        )}
+
+                                        {/* Step 3: Pour vinegar - show bottle pouring */}
+                                        {currentStep === 2 && (
+                                            <>
+                                                <div className="beaker">
+                                                    <div className="beaker-content" style={{ height: '40%' }}></div>
+                                                </div>
+                                                <div className="bottle">
+                                                    <div className="bottle-cap"></div>
+                                                </div>
+                                                <div className="liquid-stream"></div>
+                                            </>
+                                        )}
+
+                                        {/* Step 4: Watch fizzing - show bubbles */}
+                                        {currentStep === 3 && (
+                                            <>
+                                                <div className="beaker">
+                                                    <div className="beaker-content" style={{ height: '60%', background: 'rgba(100, 255, 218, 0.3)' }}></div>
+                                                </div>
+                                                <div className="bubble"></div>
+                                                <div className="bubble"></div>
+                                                <div className="bubble"></div>
+                                                <div className="bubble"></div>
+                                                <div className="fizz-particles">
+                                                    {[...Array(10)].map((_, i) => (
+                                                        <div
+                                                            key={i}
+                                                            className="fizz-particle"
+                                                            style={{
+                                                                left: `${50 + Math.random() * 20 - 10}%`,
+                                                                top: `${50 + Math.random() * 20 - 10}%`,
+                                                                '--tx': `${(Math.random() - 0.5) * 100}px`,
+                                                                '--ty': `${-Math.random() * 100}px`,
+                                                                animationDelay: `${i * 0.1}s`
+                                                            } as React.CSSProperties}
+                                                        />
+                                                    ))}
+                                                </div>
+                                            </>
+                                        )}
+
+                                        {/* Step 5: Observe CO2 bubbles - show success */}
+                                        {currentStep === 4 && (
+                                            <>
+                                                <div className="beaker">
+                                                    <div className="beaker-content" style={{ height: '80%', background: 'rgba(100, 255, 218, 0.4)' }}></div>
+                                                </div>
+                                                <div className="bubble"></div>
+                                                <div className="bubble"></div>
+                                                <div className="bubble"></div>
+                                                <div className="bubble"></div>
+                                                <div className="checkmark"></div>
+                                            </>
+                                        )}
+                                    </div>
                                 </div>
 
                                 <div className="step-navigation">
