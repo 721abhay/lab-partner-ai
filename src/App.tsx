@@ -637,10 +637,28 @@ function App() {
     const videoRef = useRef<HTMLVideoElement>(null);
     const audioContextRef = useRef<AudioContext | null>(null);
 
-    // Initialize camera
+    // Initialize camera on mount and when switching to camera tab
     useEffect(() => {
         const initCamera = async () => {
             try {
+                // Only initialize camera if we're on the camera tab
+                if (activeTab !== 'camera') {
+                    // Stop camera if we're not on camera tab
+                    if (stream) {
+                        stream.getTracks().forEach(track => track.stop());
+                        setStream(null);
+                        if (videoRef.current) {
+                            videoRef.current.srcObject = null;
+                        }
+                    }
+                    return;
+                }
+
+                // If camera is already running, don't reinitialize
+                if (stream && stream.active) {
+                    return;
+                }
+
                 const mediaStream = await navigator.mediaDevices.getUserMedia({
                     video: { facingMode: 'environment' },
                     audio: false
@@ -664,7 +682,7 @@ function App() {
                 stream.getTracks().forEach(track => track.stop());
             }
         };
-    }, []);
+    }, [activeTab]); // Re-run when activeTab changes
 
     const playWarningBeep = () => {
         if (!audioContextRef.current) {
