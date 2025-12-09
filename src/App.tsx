@@ -940,81 +940,200 @@ function App() {
 
                                     {/* Animated Step Illustration */}
                                     <div className="step-illustration active">
-                                        {/* Step 1: Add baking soda - show powder falling into beaker */}
-                                        {currentStep === 0 && (
-                                            <>
-                                                <div className="beaker">
-                                                    <div className="beaker-content"></div>
-                                                </div>
-                                                <div className="powder"></div>
-                                                <div className="hand"></div>
-                                            </>
-                                        )}
+                                        {/* Render animation based on experiment ID */}
+                                        {(() => {
+                                            const expId = selectedExperiment.id;
+                                            const step = currentStep;
 
-                                        {/* Step 2: Add food coloring (optional) - show dropper */}
-                                        {currentStep === 1 && (
-                                            <>
-                                                <div className="beaker">
-                                                    <div className="beaker-content" style={{ height: '40%', background: 'rgba(255, 255, 255, 0.3)' }}></div>
-                                                </div>
-                                                <div className="hand" style={{ top: '80px' }}></div>
-                                            </>
-                                        )}
+                                            // VINEGAR + BAKING SODA VOLCANO
+                                            if (expId === 'vinegar-baking-soda') {
+                                                if (step === 0) return (
+                                                    <>
+                                                        <div className="beaker"><div className="beaker-content"></div></div>
+                                                        <div className="powder"></div>
+                                                        <div className="hand"></div>
+                                                    </>
+                                                );
+                                                if (step === 1) return (
+                                                    <>
+                                                        <div className="beaker"><div className="beaker-content" style={{ height: '40%', background: 'rgba(255, 255, 255, 0.3)' }}></div></div>
+                                                        <div className="hand" style={{ top: '80px' }}></div>
+                                                    </>
+                                                );
+                                                if (step === 2) return (
+                                                    <>
+                                                        <div className="beaker"><div className="beaker-content" style={{ height: '40%' }}></div></div>
+                                                        <div className="bottle"><div className="bottle-cap"></div></div>
+                                                        <div className="liquid-stream"></div>
+                                                    </>
+                                                );
+                                                if (step === 3) return (
+                                                    <>
+                                                        <div className="beaker"><div className="beaker-content" style={{ height: '60%', background: 'rgba(100, 255, 218, 0.3)' }}></div></div>
+                                                        {[...Array(4)].map((_, i) => <div key={i} className="bubble"></div>)}
+                                                        <div className="fizz-particles">
+                                                            {[...Array(10)].map((_, i) => (
+                                                                <div key={i} className="fizz-particle" style={{
+                                                                    left: `${50 + Math.random() * 20 - 10}%`,
+                                                                    top: `${50 + Math.random() * 20 - 10}%`,
+                                                                    '--tx': `${(Math.random() - 0.5) * 100}px`,
+                                                                    '--ty': `${-Math.random() * 100}px`,
+                                                                    animationDelay: `${i * 0.1}s`
+                                                                } as React.CSSProperties} />
+                                                            ))}
+                                                        </div>
+                                                    </>
+                                                );
+                                                if (step === 4) return (
+                                                    <>
+                                                        <div className="beaker"><div className="beaker-content" style={{ height: '80%', background: 'rgba(100, 255, 218, 0.4)' }}></div></div>
+                                                        {[...Array(4)].map((_, i) => <div key={i} className="bubble"></div>)}
+                                                        <div className="checkmark"></div>
+                                                    </>
+                                                );
+                                            }
 
-                                        {/* Step 3: Pour vinegar - show bottle pouring */}
-                                        {currentStep === 2 && (
-                                            <>
-                                                <div className="beaker">
-                                                    <div className="beaker-content" style={{ height: '40%' }}></div>
-                                                </div>
-                                                <div className="bottle">
-                                                    <div className="bottle-cap"></div>
-                                                </div>
-                                                <div className="liquid-stream"></div>
-                                            </>
-                                        )}
+                                            // MAGIC MILK COLOR EXPLOSION
+                                            if (expId === 'milk-soap-colors') {
+                                                if (step === 0) return (
+                                                    <>
+                                                        <div className="beaker" style={{ width: '150px', borderRadius: '50%' }}>
+                                                            <div className="beaker-content" style={{ height: '30%', background: 'rgba(255, 255, 255, 0.8)' }}></div>
+                                                        </div>
+                                                    </>
+                                                );
+                                                if (step === 1) return (
+                                                    <>
+                                                        <div className="beaker" style={{ width: '150px', borderRadius: '50%' }}>
+                                                            <div className="beaker-content" style={{ height: '30%', background: 'rgba(255, 255, 255, 0.8)' }}></div>
+                                                            <div style={{ position: 'absolute', width: '10px', height: '10px', background: 'red', borderRadius: '50%', top: '70%', left: '30%' }}></div>
+                                                            <div style={{ position: 'absolute', width: '10px', height: '10px', background: 'blue', borderRadius: '50%', top: '70%', left: '50%' }}></div>
+                                                            <div style={{ position: 'absolute', width: '10px', height: '10px', background: 'green', borderRadius: '50%', top: '70%', left: '70%' }}></div>
+                                                        </div>
+                                                    </>
+                                                );
+                                                if (step === 2 || step === 3) return (
+                                                    <>
+                                                        <div className="beaker" style={{ width: '150px', borderRadius: '50%' }}>
+                                                            <div className="beaker-content" style={{ height: '30%', background: 'rgba(255, 255, 255, 0.8)' }}></div>
+                                                        </div>
+                                                        <div className="spoon"></div>
+                                                    </>
+                                                );
+                                                if (step === 4) return (
+                                                    <>
+                                                        <div className="beaker" style={{ width: '150px', borderRadius: '50%' }}>
+                                                            <div className="beaker-content" style={{ height: '30%', background: 'linear-gradient(45deg, red, blue, green, yellow)' }}></div>
+                                                        </div>
+                                                        <div className="checkmark"></div>
+                                                    </>
+                                                );
+                                            }
 
-                                        {/* Step 4: Watch fizzing - show bubbles */}
-                                        {currentStep === 3 && (
-                                            <>
-                                                <div className="beaker">
-                                                    <div className="beaker-content" style={{ height: '60%', background: 'rgba(100, 255, 218, 0.3)' }}></div>
-                                                </div>
-                                                <div className="bubble"></div>
-                                                <div className="bubble"></div>
-                                                <div className="bubble"></div>
-                                                <div className="bubble"></div>
-                                                <div className="fizz-particles">
-                                                    {[...Array(10)].map((_, i) => (
-                                                        <div
-                                                            key={i}
-                                                            className="fizz-particle"
-                                                            style={{
-                                                                left: `${50 + Math.random() * 20 - 10}%`,
-                                                                top: `${50 + Math.random() * 20 - 10}%`,
-                                                                '--tx': `${(Math.random() - 0.5) * 100}px`,
-                                                                '--ty': `${-Math.random() * 100}px`,
-                                                                animationDelay: `${i * 0.1}s`
-                                                            } as React.CSSProperties}
-                                                        />
-                                                    ))}
-                                                </div>
-                                            </>
-                                        )}
+                                            // LEMON JUICE FIZZ
+                                            if (expId === 'lemon-baking-soda') {
+                                                if (step === 0) return (
+                                                    <>
+                                                        <div className="beaker"><div className="beaker-content"></div></div>
+                                                        <div className="powder"></div>
+                                                    </>
+                                                );
+                                                if (step === 1) return (
+                                                    <>
+                                                        <div className="beaker"><div className="beaker-content" style={{ height: '30%' }}></div></div>
+                                                        <div className="bottle" style={{ background: 'linear-gradient(135deg, #ffeb3b 0%, #fbc02d 100%)' }}>
+                                                            <div className="bottle-cap"></div>
+                                                        </div>
+                                                        <div className="liquid-stream" style={{ background: 'linear-gradient(180deg, rgba(255, 235, 59, 0.8) 0%, rgba(255, 235, 59, 0) 100%)' }}></div>
+                                                    </>
+                                                );
+                                                if (step === 2 || step === 3) return (
+                                                    <>
+                                                        <div className="beaker"><div className="beaker-content" style={{ height: '50%', background: 'rgba(255, 235, 59, 0.3)' }}></div></div>
+                                                        {[...Array(4)].map((_, i) => <div key={i} className="bubble"></div>)}
+                                                    </>
+                                                );
+                                            }
 
-                                        {/* Step 5: Observe CO2 bubbles - show success */}
-                                        {currentStep === 4 && (
-                                            <>
-                                                <div className="beaker">
-                                                    <div className="beaker-content" style={{ height: '80%', background: 'rgba(100, 255, 218, 0.4)' }}></div>
-                                                </div>
-                                                <div className="bubble"></div>
-                                                <div className="bubble"></div>
-                                                <div className="bubble"></div>
-                                                <div className="bubble"></div>
-                                                <div className="checkmark"></div>
-                                            </>
-                                        )}
+                                            // ELEPHANT TOOTHPASTE
+                                            if (expId === 'elephant-toothpaste') {
+                                                if (step === 0 || step === 1) return (
+                                                    <>
+                                                        <div className="beaker" style={{ height: '150px' }}>
+                                                            <div className="beaker-content" style={{ height: '30%', background: 'rgba(100, 255, 218, 0.2)' }}></div>
+                                                        </div>
+                                                        <div className="bottle"><div className="bottle-cap"></div></div>
+                                                    </>
+                                                );
+                                                if (step === 2) return (
+                                                    <>
+                                                        <div className="beaker" style={{ height: '150px' }}>
+                                                            <div className="beaker-content" style={{ height: '100%', background: 'rgba(100, 255, 218, 0.4)', animation: 'fillBeaker 1s ease-out forwards' }}></div>
+                                                        </div>
+                                                        {[...Array(6)].map((_, i) => <div key={i} className="bubble"></div>)}
+                                                        <div className="fizz-particles">
+                                                            {[...Array(15)].map((_, i) => (
+                                                                <div key={i} className="fizz-particle" style={{
+                                                                    left: `${50 + Math.random() * 30 - 15}%`,
+                                                                    top: `${30 + Math.random() * 20}%`,
+                                                                    '--tx': `${(Math.random() - 0.5) * 150}px`,
+                                                                    '--ty': `${-Math.random() * 150}px`,
+                                                                    animationDelay: `${i * 0.05}s`
+                                                                } as React.CSSProperties} />
+                                                            ))}
+                                                        </div>
+                                                    </>
+                                                );
+                                                if (step === 3) return (
+                                                    <>
+                                                        <div className="beaker" style={{ height: '150px', overflow: 'visible' }}>
+                                                            <div className="beaker-content" style={{ height: '120%', background: 'rgba(100, 255, 218, 0.6)' }}></div>
+                                                        </div>
+                                                        <div className="checkmark"></div>
+                                                    </>
+                                                );
+                                            }
+
+                                            // OOBLECK (Non-Newtonian Fluid)
+                                            if (expId === 'oobleck') {
+                                                if (step === 0 || step === 1) return (
+                                                    <>
+                                                        <div className="beaker" style={{ width: '150px', borderRadius: '10px' }}>
+                                                            <div className="beaker-content" style={{ height: '40%', background: 'rgba(255, 255, 255, 0.6)' }}></div>
+                                                        </div>
+                                                        <div className="powder"></div>
+                                                    </>
+                                                );
+                                                if (step === 2) return (
+                                                    <>
+                                                        <div className="beaker" style={{ width: '150px', borderRadius: '10px' }}>
+                                                            <div className="beaker-content" style={{ height: '60%', background: 'rgba(200, 200, 200, 0.7)' }}></div>
+                                                        </div>
+                                                        <div className="spoon"></div>
+                                                    </>
+                                                );
+                                                if (step === 3) return (
+                                                    <>
+                                                        <div className="beaker" style={{ width: '150px', borderRadius: '10px' }}>
+                                                            <div className="beaker-content" style={{ height: '70%', background: 'rgba(200, 200, 200, 0.8)' }}></div>
+                                                        </div>
+                                                        <div className="hand"></div>
+                                                        <div className="checkmark"></div>
+                                                    </>
+                                                );
+                                            }
+
+                                            // DEFAULT: Generic animation for any experiment
+                                            return (
+                                                <>
+                                                    <div className="beaker">
+                                                        <div className="beaker-content" style={{ height: `${(step + 1) * 20}%` }}></div>
+                                                    </div>
+                                                    {step > 1 && [...Array(3)].map((_, i) => <div key={i} className="bubble"></div>)}
+                                                    {step === selectedExperiment.steps.length - 1 && <div className="checkmark"></div>}
+                                                </>
+                                            );
+                                        })()}
                                     </div>
                                 </div>
 
